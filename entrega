@@ -1,0 +1,43 @@
+valor_conta = 0
+operacao = -1
+LIMITE_SAQUE = 3 
+
+
+operacao = int(input("Qual é a operação que deseja realizar: \n[1]Saldo; \n[2]Depósito; \n[3]Saque; \n[0]Sair \n -> "))
+while operacao != 0:
+    if operacao == 1:
+        print(f"Este é o valor que você tem na conta: {valor_conta}")
+        operacao = int(input("Qual é a operação que deseja realizar: \n[1]Saldo; \n[2]Depósito; \n[3]Saque; \n[0]Sair \n -> "))
+        print("\n")
+        
+    elif operacao == 2:
+        deposito = int(input("Digite o valor que deseja depositar: "))
+        while deposito < 0:
+            print("O valor depositado não pode ser negativo")
+            deposito = int(input("Digite o valor que deseja depositar: "))
+        else:
+            valor_conta += deposito
+            print(f"Este é seu saldo atual: {valor_conta}")
+            operacao = int(input("Digite a operação que deseja realizar: \n[1]Saldo; \n[2]Depósito; \n[3]Saque; \n[0]Sair \n -> "))
+            print("\n")
+            
+    elif operacao == 3:
+        while LIMITE_SAQUE > 0:
+            saque = int(input("Digite o valor que deseja sacar: "))
+            if valor_conta <= 0:
+                print(f"Não há valor para sacar, seu saldo é de: {valor_conta}")
+            else:
+                valor_conta -= saque
+                print(f"Este é seu saldo atual: {valor_conta}")
+                LIMITE_SAQUE -= 1
+                if LIMITE_SAQUE > 0:
+                    operacao = int(input("Qual é a operação que deseja realizar: \n[1]Saldo; \n[2]Depósito; \n[3]Saque; \n[0]Sair \n -> "))                    
+                else:
+                    print("Você excedeu seu limite de saque!")
+                    operacao = int(input("Deseja fazer alguma outra operação? \n[1]Saldo; \n[2]Depósito; \n[3]Saque; \n[0]Sair \n -> "))
+                    if operacao != 3:
+                        continue
+                    else:
+                        print("Não é possível fazer essa operação, agradecemos pela preferência")
+else:
+    print("Obrigado por usar nosso sistema bancário, até logo.")
